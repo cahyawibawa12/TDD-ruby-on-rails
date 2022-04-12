@@ -41,6 +41,30 @@ RSpec.describe Food, type: :model do
     expect(food2.errors[:name]).to include("has already been taken")
   end
 
+  it "is invalid without a price" do
+    food = Food.new(
+      name: "Nasi Uduk",
+      description: "Betawi style steamed rice cooked in coconut milk. Delicious!",
+      price: nil
+    )
+
+    food.valid?
+
+    expect(food.errors[:price]).to include("can't be blank")
+  end
+
+  it "is invalid whitout a description" do
+    food = Food.new(
+      name: "Nasi Uduk",
+      description: nil,
+      price: 15000.0
+    )
+
+    food.valid?
+
+    expect(food.errors[:description]).to include("can't be blank")
+  end
+    
   describe 'self#by_letter' do
     it "should return a sorted array of results that match" do
       food1 = Food.create(
