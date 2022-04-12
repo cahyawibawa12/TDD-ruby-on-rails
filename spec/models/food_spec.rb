@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  it 'is valid with a name and a description' do
+  # category = Category.create(name: "Menu Utama")
+  
+  it 'is valid with a name and a description, category' do
     food = Food.new(
       name: 'Nasi Uduk',
       description: 'Betawi style steamed rice cooked in coconut milk. Delicious!',
-      price: 15000.0
+      price: 15000.0,
+      category_id: 1
     )
 
     expect(food).to be_valid
@@ -27,13 +30,15 @@ RSpec.describe Food, type: :model do
     food1 = Food.create(
       name: "Nasi Uduk",
       description: "Betawi style steamed rice cooked in coconut milk. Delicious!",
-      price: 10000.0
+      price: 10000.0,
+      category_id: 1
     )
 
     food2 = Food.new(
       name: "Nasi Uduk",
       description: "Just with a different description.",
-      price: 10000.0
+      price: 10000.0,
+      category_id: 1
     )
 
     food2.valid?
@@ -94,19 +99,22 @@ RSpec.describe Food, type: :model do
       food1 = Food.create(
         name: "Nasi Uduk",
         description: "Betawi style steamed rice cooked in coconut milk. Delicious!",
-        price: 10000.0
+        price: 10000.0,
+        category_id: 1
       )
 
       food2 = Food.create(
         name: "Kerak Telor",
         description: "Betawi traditional spicy omelette made from glutious rice cooked with egg and serced with serundeng.",
-        price: 8000.0
+        price: 8000.0,
+        category_id: 1
       )
 
       food3 = Food.create(
         name: "Nasi Semur Jengkol",
         description: "Based on dongfruit, this menu promises a unique and delicious taste with a small hint of bitterness.",
-        price: 8000.0
+        price: 8000.0,
+        category_id: 1
       )
 
       expect(Food.by_letter("N")).to eq([food3, food1])
